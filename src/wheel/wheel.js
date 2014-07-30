@@ -51,7 +51,13 @@
 		wheelDeltaX *= this.options.invertWheelDirection;
 		wheelDeltaY *= this.options.invertWheelDirection;
 
-		if ( !this.hasVerticalScroll ) {
+		if ( !this.hasHorizontalScroll ) {
+			wheelDeltaX = 0;
+		} else if ( !this.hasVerticalScroll && this.options.mouseWheelScrollsHorizontally ) {
+			wheelDeltaX = wheelDeltaY;
+			wheelDeltaY = 0;
+		} if ( !this.hasVerticalScroll ) {
+			wheelDeltaY = 0;
 			wheelDeltaX = wheelDeltaY;
 			wheelDeltaY = 0;
 		}
