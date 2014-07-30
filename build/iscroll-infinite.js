@@ -913,9 +913,6 @@ IScroll.prototype = {
 			return;
 		}
 
-		e.preventDefault();
-		e.stopPropagation();
-
 		var wheelDeltaX, wheelDeltaY,
 			newX, newY,
 			that = this;
@@ -950,12 +947,23 @@ IScroll.prototype = {
 
 		if ( !this.hasHorizontalScroll ) {
 			wheelDeltaX = 0;
+			if ( this.options.eventPassthrough != 'horizontal' ) {
+				e.preventDefault();
+				e.stopPropagation();
+			}
 		} else if ( !this.hasVerticalScroll && this.options.mouseWheelScrollsHorizontally ) {
 			wheelDeltaX = wheelDeltaY;
+			e.preventDefault();
+			e.stopPropagation();
 		}
 
 		if ( !this.hasVerticalScroll ) {
 			wheelDeltaY = 0;
+
+			if ( this.options.eventPassthrough != 'vertical' ) {
+				e.preventDefault();
+				e.stopPropagation();
+			}
 		}
 
 		if ( this.options.snap ) {
