@@ -1559,7 +1559,7 @@ IScroll.prototype = {
 				this._key(e);
 				break;
 			case 'click':
-				if ( !e._constructed ) {
+				if ( !e._constructed && !(/(SELECT|INPUT|TEXTAREA)/i).test(e.target.tagName)) {
 					e.preventDefault();
 					e.stopPropagation();
 				}
