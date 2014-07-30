@@ -55,10 +55,9 @@
 			wheelDeltaX = 0;
 		} else if ( !this.hasVerticalScroll && this.options.mouseWheelScrollsHorizontally ) {
 			wheelDeltaX = wheelDeltaY;
-			wheelDeltaY = 0;
-		} if ( !this.hasVerticalScroll ) {
-			wheelDeltaY = 0;
-			wheelDeltaX = wheelDeltaY;
+		}
+
+		if ( !this.hasVerticalScroll ) {
 			wheelDeltaY = 0;
 		}
 
