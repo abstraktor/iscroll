@@ -1233,23 +1233,25 @@ IScroll.prototype = {
 
 		if ( !this.hasHorizontalScroll ) {
 			wheelDeltaX = 0;
-			if ( this.options.eventPassthrough != 'horizontal' ) {
-				e.preventDefault();
-				e.stopPropagation();
-			}
 		} else if ( !this.hasVerticalScroll && this.options.mouseWheelScrollsHorizontally ) {
 			wheelDeltaX = wheelDeltaY;
-			e.preventDefault();
-			e.stopPropagation();
 		}
 
 		if ( !this.hasVerticalScroll ) {
 			wheelDeltaY = 0;
+		}
 
-			if ( this.options.eventPassthrough != 'vertical' ) {
+		if(
+			//stop event if we're not horizontally forwarding
+			(!this.hasHorizontalScroll && !this.options.eventPassthrough) ||
+
+			//stop vertical event
+			(!this.hasVerticalScroll && !this.options.eventPassthrough) ||
+
+			//stop vertical event even if we don't scroll vertically because we use it for horizontal scrolling
+			(this.hasHorizontalScroll && this.options.mouseWheelScrollsHorizontally)){
 				e.preventDefault();
 				e.stopPropagation();
-			}
 		}
 
 		if ( this.options.snap ) {
